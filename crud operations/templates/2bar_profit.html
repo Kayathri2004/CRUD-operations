@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bar profit page</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/templates/style.css" />
+  </head>
+  <body style="background-color: lightpink;">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-11 sidebar">
+          <div
+            class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary sidebar"
+            style="width: 280px"
+          > 
+            <!-- Your existing sidebar content -->
+            <a
+              href="/"
+              class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+            >
+              <svg class="bi pe-none me-2" width="40" height="32">
+                <use xlink:href="#bootstrap"></use>
+              </svg>
+              <span class="fs-4">Revenue Management</span>
+            </a>
+            <hr />
+            <ul class="nav nav-pills flex-column mb-auto">
+              <li>
+                <a
+                  href="http://127.0.0.1:8000/get_res_profit"
+                  class="nav-link link-body-emphasis"
+                >
+                  <svg class="bi pe-none me-2" width="16" height="16">
+                    <use xlink:href="#table"></use>
+                  </svg>
+                  Restaurant Profit
+                </a>
+              </li>
+              <li>
+                <a
+                  href="http://127.0.0.1:8000/get_hotel_profit"
+                  class="nav-link link-body-emphasis"
+                >
+                  <svg class="bi pe-none me-2" width="16" height="16">
+                    <use xlink:href="#table"></use>
+                  </svg>
+                  Hotel Profit
+                </a>
+              </li>
+              <li>
+                <a
+                  href="http://127.0.0.1:8000/get_bar_profit"
+                  class="nav-link active"
+                >
+                  <svg class="bi pe-none me-2" width="16" height="16">
+                    <use xlink:href="#table"></use>
+                  </svg>
+                  Bar Profit
+                </a>
+              </li>
+            </ul>
+            <hr class="bottomHR" />
+            
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div class="content-body">
+      <div class="container-fluid">
+        <div class="row guest-database-wrapper restaurant-page">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4 class="card-title">Bar Profit</h4>
+                  <div class="d-flex align-items-center mb-0">
+                    <a href="#"
+                      class="btn btn-primary mb-2 add-tax"
+                      type="button"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalGrid"
+                      style="background-color: olive; border-color: olive;"
+                      >Add Bar Profit
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table
+                    id="example"
+                    class="display table"
+                    style="min-width: 800px"
+                  >
+                    <thead>
+                      <tr>
+                        <td colspan="6">&nbsp;</td>
+                      </tr> 
+                      <tr class="table-head">
+                        <th>Table No</th>
+                        <th>Booking Count</th>
+                        <th>Price Amount</th>
+                        <th>Tax Percentage</th>
+                        <th>Total Amount</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Assuming `new_id` is an array of objects -->
+                      {% for new_id in new_id %}
+                      <tr class="table-row">
+                        <td>{{new_id.Table_No}}</td>
+                        <td>{{new_id.Booking_Count}}</td>
+                        <td>{{new_id.Price_Amount}}</td>
+                        <td>{{new_id.Tax_Percentage}}%</td>
+                        <td>{{new_id.Total_Amount}}</td>
+                        <td>
+                          <div class="d-flex">
+                            <a
+                              href="#"
+                              class="btn btn-primary shadow btn-xs sharp me-1"
+                              type="button"
+                              data-bs-toggle="modal"
+                              data-bs-target="#modalGrid1"
+                              onclick="Guest_value('{{new_id.id}}')"
+                              ><i class="bi bi-pencil-square"
+                              ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                              </svg></i
+                          ></a>
+                            <a
+                              href="#"
+                              class="btn btn-danger shadow btn-xs sharp"
+                              type="button"
+                              data-bs-toggle="modal"
+                              data-bs-target="#delModal"
+                              onclick="delete_Guest('{{new_id.id}}')"
+                              ><i class="bi bi-trash3-fill"
+                              ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+                              </svg></i
+                          ></a>
+                          </div>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade restaurant-page-popup" id="modalGrid">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Bar Profit</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <form class="row g-3 needs-validation" novalidate>
+            <div class="modal-body">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-6 col-lg-6 col-md-6">
+                    <div class="input-block">
+                      <label for="checkin" class="form-label">Table No</label>
+                      <div class="input-text-wrapper">
+                        <div class="input-text">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="Table_No"
+                            name="Table_No"
+                            placeholder="Table No"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-lg-6 col-md-6">
+                    <div class="input-block">
+                      <label for="taxtype" class="form-label"
+                        >Booking Count<span class="text-danger">*</span></label
+                      >
+                      <input
+                        type="text"
+                        id="Booking_Count"
+                        name="Booking_Count"
+                        placeholder="Booking Count"
+                        class="form-control"
+                        oninput="calculateTotalAmount()"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-lg-6 col-md-6">
+                    <div class="input-block">
+                      <label for="taxtype" class="form-label"
+                        >Price Amount<span class="text-danger">*</span></label
+                      >
+                      <input
+                        type="text"
+                        id="Price_Amount"
+                        name="Price_Amount"
+                        placeholder="Price Amount"
+                        class="form-control"
+                        oninput="calculateTotalAmount()"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-lg-6 col-md-6">
+                    <div class="input-block">
+                      <label for="taxtype" class="form-label"
+                        >Tax Percentage<span class="text-danger">*</span></label
+                      >
+                      <input
+                        type="text"
+                        id="Tax_Percentage"
+                        name="Tax_Percentage"
+                        placeholder="Tax Percentage"
+                        class="form-control"
+                        oninput="calculateTotalAmount()"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-lg-6 col-md-6">
+                    <div class="input-block">
+                      <label for="taxamount" class="form-label"
+                        >Total Amount<span class="text-danger">*</span></label
+                      >
+                      <input
+                        type="number"
+                        id="Total_Amount"
+                        name="Total_Amount"
+                        placeholder="Total Amount"
+                        class="form-control"
+                        oninput="calculateTotalAmount()"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-danger light"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="add_Guest('Add','')"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade restaurant-page-popup" id="modalGrid1">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit Bar Profit</h5>
+            <input type="hidden" id="edit_id" />
+
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <form class="row g-3 needs-validation" novalidate>
+            <div class="modal-body">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-6 col-lg-6 col-md-6">
+                    <div class="input-block">
+                      <label for="checkin" class="form-label">Table No</label>
+                      <div class="input-text-wrapper">
+                        <div class="input-text">
+                          <input
+                            
+                            type="text"
+                            class=" form-control"
+                            id="edit_Table_No"
+                            name="edit_Table_No"
+                            placeholder="Table No"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-lg-6 col-md-6">
+                    <div class="input-block">
+                      <label for="taxtype" class="form-label"
+                        >Booking Count<span class="text-danger">*</span></label
+                      >
+                      <input
+                        type="text"
+                        placeholder="Room No"
+                        class="form-control"
+                        id="edit_Booking_Count"
+                        name="edit_Booking_Count"
+                        oninput="editcalculateTotalAmount()"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-lg-6 col-md-6">
+                    <div class="input-block">
+                      <label for="taxtype" class="form-label"
+                        >Price Amount<span class="text-danger">*</span></label
+                      >
+                      <input
+                        type="text"
+                        placeholder="Guest Name"
+                        class="form-control"
+                        id="edit_Price_Amount"
+                        name="edit_Price_Amount"
+                        oninput="editcalculateTotalAmount()"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-lg-6 col-md-6">
+                    <div class="input-block">
+                      <label for="taxamount" class="form-label"
+                        >Tax Percentage<span class="text-danger">*</span></label
+                      >
+                      <input
+                        type="number"
+                        placeholder="Tax Amount"
+                        class="form-control"
+                        id="edit_Tax_Percentage"
+                        name="edit_Tax_Percentage"
+                        oninput="editcalculateTotalAmount()"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-lg-6 col-md-6">
+                    <div class="input-block">
+                      <label for="taxamount" class="form-label"
+                        >Total Amount<span class="text-danger">*</span></label
+                      >
+                      <input
+                        type="number"
+                        placeholder="Tax Amount"
+                        class="form-control"
+                        id="edit_Total_Amount"
+                        name="edit_Total_Amount"
+                        oninput="editcalculateTotalAmount()"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-danger light"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="edit_Guest('Edit','')"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="delModal"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered position-relative">
+        <div class="modal-box red"></div>
+        <div class="modal-content" style="border-radius: 20px !important">
+          <div
+            class="del bg-danger d-flex justify-content-center align-items-center"
+          >
+          <i class="class="bi bi-x-square""
+          ><svg xmlns="http://www.w3.org/2000/svg" width="45" height="70" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+          </svg></i>
+          </div>
+          <div class="modal-header border-0"></div>
+          <div class="modal-body">
+            <div class="text-center fz-25 roboto">Are You want to delete?</div>
+          </div>
+          <div class="modal-footer justify-content-between border-0">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+
+            <button type="button" class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+      function calculateTotalAmount() {
+        var bookingCount = parseFloat($("#Booking_Count").val()) || 0;
+        var priceAmount = parseFloat($("#Price_Amount").val()) || 0;
+        var taxPercentage = parseFloat($("#Tax_Percentage").val()) || 0;
+    
+        var totalAmount = bookingCount * priceAmount * (1 + taxPercentage / 100);
+    
+        $("#Total_Amount").val(totalAmount.toFixed(2));
+      }
+    </script>
+    <script>
+      function editcalculateTotalAmount() {
+        var bookingCount = parseFloat($("#edit_Booking_Count").val()) || 0;
+        var priceAmount = parseFloat($("#edit_Price_Amount").val()) || 0;
+        var taxPercentage = parseFloat($("#edit_Tax_Percentage").val()) || 0;
+    
+        var totalAmount = bookingCount * priceAmount * (1 + taxPercentage / 100);
+    
+        $("#edit_Total_Amount").val(totalAmount.toFixed(2));
+      }
+    </script>
+    <script>
+      $(document).ready(function () {
+        $("#example").DataTable();
+      });
+    </script>
+
+    <script type="text/javascript">
+      function add_Guest(action, id) {
+        if (action === "Add") {
+          var formData = {
+            Table_No: $("#Table_No").val(),
+            Booking_Count: $("#Booking_Count").val(),
+            Price_Amount: $("#Price_Amount").val(),
+            Tax_Percentage: $("#Tax_Percentage").val(),
+            Total_Amount: $("#Total_Amount").val(),
+          };
+          $.ajax({
+            type: "POST",
+            url: "/create_bar_profit",
+            data: formData,
+            dataType: "json",
+            encode: true,
+          }).done(function (data1) {
+            if (data1 == "Done") {
+              location.reload();
+            }
+
+            if (data1 == "Already this name Exist") {
+              $("#message").text(data1);
+            }
+          });
+
+          event.preventDefault();
+        }
+      }
+
+      function edit_Guest(action, id) {
+        if (action == "Edit") {
+          var formData = {
+            edit_id: parseInt($("#edit_id").val(), 10),
+            edit_Table_No: $("#edit_Table_No").val(),
+            edit_Booking_Count: $("#edit_Booking_Count").val(),
+            edit_Price_Amount: $("#edit_Price_Amount").val(),
+            edit_Tax_Percentage: $("#edit_Tax_Percentage").val(),
+            edit_Total_Amount: $("#edit_Total_Amount").val(),
+          };
+          $.ajax({
+            type: "POST",
+            url: "/update_bar_profit",
+            data: formData,
+            dataType: "json",
+            encode: true,
+          }).done(function (data) {
+            if (data == "Already this name Exist") {
+              $("#messages").html(data);
+            }
+            if (data == "Done") {
+              location.reload();
+            }
+          });
+          event.preventDefault();
+        }
+      }
+
+      function Guest_value(data) {
+        var id = data;
+        $.ajax({
+          type: "put",
+          url: "/put_bar_profit/" + id,
+          id: id,
+          contentType: "application/json",
+          success: function (data) {
+            $("#edit_id").val(data.id);
+            $("#edit_Table_No").val(data.Table_No),
+              $("#edit_Booking_Count").val(data.Booking_Count),
+              $("#edit_Price_Amount").val(data.Price_Amount),
+              $("#edit_Tax_Percentage").val(data.Tax_Percentage),
+              $("#edit_Total_Amount").val(data.Total_Amount),
+              $("#modalGrid1").modal("show");
+          },
+        });
+        return false;
+      }
+
+      function delete_Guest(id) {
+        $("#delModal").modal("show");
+        $("#delModal")
+          .find(".btn-danger")
+          .on("click", function () {
+            $.ajax({
+              type: "get",
+              url: "/del_bar_profit/" + id,
+              data: { id: id },
+              success: function () {
+                location.reload();
+              },
+              error: function () {
+                alert("Error deleting guest");
+              },
+            });
+          });
+      }
+    </script>
+  </body>
+</html>

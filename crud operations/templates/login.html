@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login & Registration Form</title>
+  <!---Custom CSS File--->
+  <link rel="stylesheet" href="/templates/loginstyle.css" />
+</head>
+<body>
+  <div class="container">
+    <input type="checkbox" id="check">
+    <div class="login form">
+      <header>Login</header>
+      <form>
+        <input type="text" id="login-email" placeholder="Enter your email" required>
+        <input type="password" id="login-password" placeholder="Enter your password" required>
+        <input type="button" class="button" onclick="login()" value="Login">
+      </form>
+      <div class="signup">
+        <span class="signup">Don't have an account?
+         <label for="check">Signup</label>
+        </span>
+      </div>
+    </div>
+    <div class="registration form">
+      <header>Signup</header>
+      <form>
+        <input type="text" id="signup-username" placeholder="Enter your username" required>
+        <input type="text" id="signup-email" placeholder="Enter your email" required>
+        <input type="password" id="signup-password" placeholder="Create a password" required>
+        <input type="button" class="button" value="Signup" onclick="addUser()">
+      </form>
+      <div class="signup">
+        <span class="signup">Already have an account?
+         <label for="check">Login</label>
+        </span>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+  function addUser(){
+  let formData= new FormData();
+  formData.append("signup_username",$("#signup-username").val());
+  formData.append("signup_email",$("#signup-email").val());
+  formData.append("signup_password",$("#signup-password").val());
+  
+  $.ajax({
+      type: 'POST',
+      url: '/signup',
+      data: formData,
+      contentType: false, 
+      processData: false, 
+      dataType: 'json',
+
+  }).done(function(msg){
+      if(msg=="Done"){
+          window.location.href="/login";
+      }
+      else{
+          
+          $("#serr").text(msg);
+      }
+
+  });
+
+}
+function login(){
+  let formData= new FormData();
+  formData.append("login_email",$("#login-email").val());
+  formData.append("login_password",$("#login-password").val());
+ 
+  
+  $.ajax({
+      type: 'POST',
+      url: '/logcheck',
+      data: formData,
+      contentType: false, 
+      processData: false, 
+      dataType: 'json',
+
+  }).done(function(msg){
+      if(msg=="Invalid Creditional"){
+          $("#err").text(msg);
+          
+      }
+      else{
+          window.location.href="/get_res_profit";
+      }
+   
+
+  });
+
+}
+</script>
+</html>
+        

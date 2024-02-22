@@ -1,0 +1,117 @@
+body {
+    font-family: "Arial", sans-serif;
+    margin: 0;
+  }
+  /* .content-body {
+    margin-left: 280px; /* Adjust this value based on your sidebar width */
+    /* padding: 20px;
+  }  */
+  
+  .container-fluid {
+    padding: 0;
+  } 
+
+  .sidebar {
+    padding-top:90px;
+    height: 60vh;
+    width: 280px;
+    color: rgb(255, 255, 255);
+    position: fixed;
+  }
+
+  .sidebar a {
+    color: rgb(255, 255, 255);
+  }
+
+  .sidebar hr {
+    border-color: #6c757d;
+  }
+  .content-body {
+    margin-left:100px;
+    padding-left:200px;
+    margin-top: 100px;
+  }
+  .card {
+    border: none;
+    border-radius: 10px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  }
+
+  .card-header {
+    /* background-color: #343a40; */
+    height:60px;
+    color: black;
+    /* border-bottom: 1px solid #6c757d; */
+    padding: 0.5rem;
+  }
+
+  .card-title {
+    margin-bottom: 0;
+    font-size: 1.5rem; 
+    padding-left: 0.1rem;
+    font-weight: bold; /* Add this line */
+}
+.add-tax {
+  padding: 0.5rem 0.5rem; /* Adjust the padding as needed */
+}
+
+  .table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+  }
+  .table-head th {
+    background-color: olive;
+    color: white; 
+    height: 55px; /* Set text color to white for better contrast */
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      position: absolute;
+
+      height: auto;
+    }
+
+    .content-body {
+      margin-left: 0;
+      padding: 10px;
+    }
+  }
+
+  /* ... Existing CSS ... */
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2%;
+    /* background-color: #343a40; */
+    /* color: #fff; */
+    /* border-bottom: 1px solid #6c757d; */
+    position: relative;
+}
+
+  .add-tax {
+    /* background-color: #007bff;
+    border-color: #007bff; */
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Adjust the right distance as needed */
+    transform: translateY(-50%); /* Center vertically */
+}
+
+  th, td {
+    
+    padding-bottom: 20px;
+    padding-left: 40px;
+    padding-right: 70px;
+  }
+
+.dataTables_filter,.paging_simple_numbers
+{
+  padding-left:30%
+}
+
